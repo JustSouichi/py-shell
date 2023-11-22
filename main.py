@@ -11,6 +11,7 @@ while bash_statement == True:
   user_name = pwd.getpwuid(os.getuid())[0]
   user_pc = socket.gethostname().split('.')[0]
   user_current_path = os.getcwd()
+ 
   if user_current_path == '/Users/' + user_name: 
     user_path_to_print = colored('~', 'green')
   else:
@@ -29,5 +30,21 @@ while bash_statement == True:
   
   elif first_user_input_argument == '':
     pass
+  elif first_user_input_argument == 'cd':
+   try: 
+    if os.path.isdir(user_input_splitted[1]):
+      os.chdir(user_input_splitted[1])
+    else:
+      print("-bash: cd: " + user_input_splitted[1] + ": no such directory")
+   except:
+    print("cd please enter folder name")
+  elif first_user_input_argument == 'ls':
+    try:
+      if user_input_splitted[1]:
+        print("work")
+      else:
+        print("ls please enter folder name")
+    except:
+      print(os.listdir())
   else:
     print("-bash: " + first_user_input_argument + ": command not found")
