@@ -21,8 +21,10 @@ while bash_statement == True:
   terminal_display = user_name + "@" + user_pc + ":" + user_path_to_print + "$"      
   user_input = input(terminal_display + " ")
   user_input_splitted = user_input.split()
-  first_user_input_argument = user_input_splitted[0]
-
+  try:
+    first_user_input_argument = user_input_splitted[0]
+  except:
+    first_user_input_argument = ''
   if first_user_input_argument == "quit" or first_user_input_argument == "exit":
     now = datetime.datetime.now()
     print("[ Session Ended At " + str(now.hour) + ":" + str(now.minute) + "]")
@@ -30,6 +32,15 @@ while bash_statement == True:
   
   elif first_user_input_argument == '':
     pass
+  elif first_user_input_argument == 'clear' or first_user_input_argument == 'clr':
+      if os.name == 'posix':
+        os.system('clear')
+      elif os.name == 'nt':
+        os.system('cls')
+      else:
+        print("This OS can't do this command: clear")
+  elif first_user_input_argument == 'pwd':
+      print(os.getcwd())
   elif first_user_input_argument == 'cd':
    try: 
     if os.path.isdir(user_input_splitted[1]):
