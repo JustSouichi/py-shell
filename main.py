@@ -40,11 +40,15 @@ while bash_statement == True:
     print("cd please enter folder name")
   elif first_user_input_argument == 'ls':
     try:
-      if user_input_splitted[1]:
-        print("work")
+      if user_input_splitted[1] and os.path.exists(user_input_splitted[1]):
+        print_current_files_and_folders = os.listdir(user_input_splitted[1])
+        print_current_files_and_folders = ' '.join(print_current_files_and_folders)
+        print(print_current_files_and_folders)
       else:
-        print("ls please enter folder name")
+        print("ls please enter valid folder path")
     except:
-      print(os.listdir())
+        print_current_files_and_folders = os.listdir()
+        print_current_files_and_folders = ' '.join(print_current_files_and_folders)
+        print(print_current_files_and_folders)
   else:
     print("-bash: " + first_user_input_argument + ": command not found")
